@@ -1,0 +1,221 @@
+- block:
+    - name: Check if Git is installed
+      shell: brew list --versions git
+      register: git_installed
+      ignore_errors: true
+    - name: Install Git
+      homebrew:
+        name: git
+        state: present
+      when: git_installed.rc != 0 and user_role == 'developer'
+    - name: Install NVM
+      homebrew:
+        name: nvm
+        state: latest
+    - name: Configure NVM
+      lineinfile:
+        dest: ~/.bash_profile
+        line: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh"
+
+    - name: Install Node.js versions
+      become: false
+      shell: |
+        source ~/.bash_profile
+        nvm install {{ item }}
+      loop:
+        - 14
+        - 16
+        - 18
+        - 20
+
+    - name: Set default Node.js version
+      become: false
+      shell: |
+        source ~/.bash_profile
+        nvm use 20
+    - name: Install PNPM
+      homebrew:
+        name: pnpm
+        state: latest
+
+    - name: Install NPM
+      homebrew:
+        name: npm
+        state: latest
+
+    - name: Install Yarn
+      homebrew:
+        name: yarn
+        state: latest
+    - name: Install Go
+      homebrew:
+        name: go
+        state: latest
+    - name: Install Python 3.9
+      homebrew:
+        name: python@3.9
+        state: latest
+
+    - name: Install Python 3.10
+      homebrew:
+        name: python@3.10
+        state: latest
+
+    - name: Install Python 3.11
+      homebrew:
+        name: python@3.11
+        state: latest
+    - name: Install Rust
+      homebrew:
+        name: rustup-init
+        state: latest
+
+    - name: Initialize Rust
+      command: rustup-init -y
+      args:
+        creates: ~/.cargo/bin/rustc
+
+    - name: Add Cargo to PATH
+      lineinfile:
+        dest: ~/.bash_profile
+        line: 'export PATH="$HOME/.cargo/bin:$PATH"'
+    - name: Install Oh My Zsh
+      git:
+        repo: https://github.com/ohmyzsh/ohmyzsh.git
+        dest: ~/.oh-my-zsh
+        depth: 1
+
+    - name: Set ZSH as default shell
+      shell: chsh -s /bin/zsh "{{ ansible_user_id }}"
+
+    - name: Copy Oh My Zsh configuration file
+      become: true
+      copy:
+        src: ~/.oh-my-zsh/templates/zshrc.zsh-template
+        dest: ~/.zshrc
+
+    - name: Add aliases to .zshrc
+      become: true
+      lineinfile:
+        dest: ~/.zshrc
+        line: "{{ item }}"
+        insertafter: EOF
+      with_items:
+        - "alias uuid='uuidgen | tr \"[:upper:]\" \"[:lower:]\"'"
+        - "alias pa='./exec.sh php artisan'"
+        - "alias zshconfig='mate ~/.zshrc'"
+        - "alias ohmyzsh='mate ~/.oh-my-zsh'"
+
+    - name: Add plugins to .zshrc
+      become: true
+      lineinfile:
+        dest: ~/.zshrc
+        line: "plugins=(git zsh-autosuggestions)"
+        insertafter: "ZSH_THEME=*"
+        state: present
+
+    - name: Set ZSH theme in .zshrc
+      become: true
+      lineinfile:
+        dest: ~/.zshrc
+        regexp: '^ZSH_THEME='
+        line: "ZSH_THEME=\"robbyrussell\""
+
+    - name: Install Zsh autocompletion
+      become: true
+      command: git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
+      args:
+        creates: ~/.oh-my-zsh/custom/plugins/zsh-completions
+    - name: Tap PHP repository
+      command: brew tap shivammathur/php
+      args:
+        creates: /usr/local/Homebrew/Library/Taps/shivammathur/homebrew-php
+
+    - name: Install PHP 8.2
+      homebrew:
+        name: shivammathur/php/php@8.2
+        state: latest
+    - name: Download Composer
+      get_url:
+        url: https://getcomposer.org/installer
+        dest: /tmp/composer-setup.php
+        mode: '0755'
+
+    - name: Install Composer
+      shell: php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+    - name: Remove installer
+      file:
+        path: /tmp/composer-setup.php
+        state: absent
+    - name: Install dust
+      homebrew:
+        name: dust
+        state: latest
+    - name: Install aws-iam-authenticator
+      homebrew:
+        name: aws-iam-authenticator
+        state: latest
+        update_homebrew: yes
+
+    - name: Install awscli
+      homebrew:
+        name: awscli
+        state: latest
+        update_homebrew: yes
+    - name: Install Terraform
+      homebrew:
+        name: terraform
+        state: latest
+    - name: Tap aaratn/terraenv
+      homebrew_tap:
+        name: aaratn/terraenv
+        state: present
+
+    - name: Install terraenv
+      homebrew:
+        name: terraenv
+        state: latest
+    - name: Install TFLint
+      homebrew:
+        name: tflint
+        state: latest
+    - name: Install Deno
+      homebrew:
+        name: deno
+        state: latest
+    - name: Install speedtest-cli
+      homebrew:
+        name: speedtest-cli
+        state: latest
+
+    - name: Install wget
+      homebrew:
+        name: wget
+        state: latest
+    - name: Install htop
+      homebrew:
+        name: htop
+        state: latest
+    - name: Install helm
+      homebrew:
+        name: helm
+        state: latest
+    - name: Install eksctl
+      shell: |
+        curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+        sudo mv /tmp/eksctl /usr/local/bin
+      args:
+        executable: /bin/bash
+      become_method: sudo
+
+    - name: Install curl
+      homebrew:
+        name: curl
+        state: latest
+    - name: Install TypeScript
+      npm:
+        name: typescript
+        global: yes
