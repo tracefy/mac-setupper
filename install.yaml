@@ -34,15 +34,15 @@
         - whatsapp
         - zoom
         - google-chrome
-        #  SALES apps
-    #    - name: Install sales casks
-    #      when: user_role == 'sales'
-    #      become: no
-    #      homebrew_cask:
-    #        name: "{{ item }}"
-    #        state: present
-    #      loop:
-    #        - sample
+    #          SALES apps
+    - name: Install sales casks
+      when: user_role == 'sales'
+      become: no
+      homebrew_cask:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - google-chrome
     - name: Install dev casks
       when: user_role == 'developer'
       become: no
@@ -51,60 +51,60 @@
         state: present
       loop:
         - docker
-    #        - 1password
-    #        - alfred
-    #        - amazon-chime
-    #        - boop
-    #        - curseforge
-    #        - db-browser-for-sqlite
-    #        - dotnet
-    #        - dropzone
-    #        - figma
-    #        - firefox
-    #        - iterm2
-    #        - jetbrains-toolbox
-    #        - macdown
-    #        - opera
-    #        - opera-gx
-    #        - postman
-    #        - rar
-    #        - sequel-pro
-    #        - sidequest
-    #        - skype
-    #        - slack
-    #        - spectacle
-    #        - spotify
-    #        - sublime-text
-    #        - tableplus
-    #        - teamviewer
-    #        - tower
-    #        - utm
-    #        - visual-studio-code
-    #        - vlc
-#    - name: Run Jetbrains Toolbox
-#      command: '/Users/joeriabbo/Applications/JetBrains Toolbox.app/Contents/MacOS/jetbrains-toolbox'
-#      when: user_role == 'developer'
-#
-#    - name: Installeer PhpStorm
-#      command: "~/Applications/JetBrains Toolbox/JetBrains Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=phpstorm"
-#      when: user_role == 'developer'
-#
-#    - name: Installeer GoLand
-#      command: "~/Applications/JetBrains Toolbox/JetBrains Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=goland"
-#      when: user_role == 'developer'
-#
-#    - name: Installeer WebStorm
-#      command: "~/Applications/JetBrains Toolbox/JetBrains Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=webstorm"
-#      when: user_role == 'developer'
-#
-#    - name: Installeer IntelliJ IDEA Ultimate
-#      command: "~/Applications/JetBrains Toolbox/JetBrains Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=ideaIC"
-#      when: user_role == 'developer'
-#
-#    - name: Installeer Rider
-#      command: "~/Applications/JetBrains Toolbox/JetBrains Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=rider"
-#      when: user_role == 'developer'
-#
+        - 1password
+        - alfred
+        - amazon-chime
+        - boop
+        - curseforge
+        - db-browser-for-sqlite
+        - dotnet
+        - dropzone
+        - figma
+        - firefox
+        - iterm2
+        - jetbrains-toolbox
+        - macdown
+        - opera
+        - opera-gx
+        - postman
+        - rar
+        - sequel-pro
+        - sidequest
+        - skype
+        - slack
+        - spectacle
+        - spotify
+        - sublime-text
+        - tableplus
+        - teamviewer
+        - tower
+        - utm
+        - visual-studio-code
+        - vlc
+    - name: Run Jetbrains Toolbox
+      command: "/Applications/JetBrains' 'Toolbox.app/Contents/MacOS/jetbrains-toolbox"
+      when: user_role == 'developer'
+    #
+    #    - name: Installeer PhpStorm
+    #      command: "~/Applications/JetBrains Toolbox/JetBrains Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=phpstorm"
+    #      when: user_role == 'developer'
+    #
+    #    - name: Installeer GoLand
+    #      command: "~/Applications/JetBrains' 'Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=goland"
+    #      when: user_role == 'developer'
+    #
+    #    - name: Installeer WebStorm
+    #      command: "~/Applications/JetBrains Toolbox/JetBrains Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=webstorm"
+    #      when: user_role == 'developer'
+    #
+    #    - name: Installeer IntelliJ IDEA Ultimate
+    #      command: "~/Applications/JetBrains Toolbox/JetBrains Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=ideaIC"
+    #      when: user_role == 'developer'
+    #
+    #    - name: Installeer Rider
+    #      command: "~/Applications/JetBrains Toolbox/JetBrains Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=rider"
+    #      when: user_role == 'developer'
+    #
 #    - name: Install PycCharm Professional Edition
 #      import_tasks: editors/pycharm.yaml
 #      when: user_role == 'developer'

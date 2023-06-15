@@ -1,17 +1,24 @@
 - block:
-    - name: Installeer PyCharm Professional Edition
-      command: "/usr/local/jetbrains-toolbox/jetbrains-toolbox --jetbrains-toolbox --install=pycharm-professional"
-    - name: Install WakaTime plugin
-      command: "/usr/local/jetbrains-toolbox/jetbrains-toolbox --jetbrains-toolbox --install=WakaTime"
+#    - name: Installeer PyCharm Professional Edition
+#      command: "/Applications/JetBrains' 'Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=pycharm-professional"
+#    - name: Install PyCharm plugin using JetBrains Toolbox
+#      community.general.jetbrains_toolbox_plugins:
+#        name: WakaTime
+#        toolbox_path: "/Applications/JetBrains' 'Toolbox.app/Contents/MacOS/jetbrains-toolbox"
+#        product: pycharm
+#        state: present
 
-    - name: Install Rust plugin
-      command: "/usr/local/jetbrains-toolbox/jetbrains-toolbox --jetbrains-toolbox --install=Rust"
-
-    - name: Install Requirements plugin
-      command: "/usr/local/jetbrains-toolbox/jetbrains-toolbox --jetbrains-toolbox --install=Requirements"
-
-    - name: Install GitHub Copilot plugin
-      command: "/usr/local/jetbrains-toolbox/jetbrains-toolbox --jetbrains-toolbox --install=GitHub"
-
-    - name: Install .env files support plugin
-      command: "/usr/local/jetbrains-toolbox/jetbrains-toolbox --jetbrains-toolbox --install=dotenv"
+#    - name: Install WakaTime plugin
+#      command: "/Applications/JetBrains' 'Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=WakaTime"
+#
+#    - name: Install Rust plugin
+#      command: "/Applications/JetBrains' 'Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=Rust"
+#
+#    - name: Install Requirements plugin
+#      command: "/Applications/JetBrains' 'Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=Requirements"
+#
+#    - name: Install GitHub Copilot plugin
+#      command: "/Applications/JetBrains' 'Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=GitHub"
+#
+#    - name: Install .env files support plugin
+#      command: "/Applications/JetBrains' 'Toolbox.app/Contents/MacOS/jetbrains-toolbox --jetbrains-toolbox --install=dotenv"

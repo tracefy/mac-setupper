@@ -22,5 +22,5 @@ pip3 install ansible
 
 # Verify Ansible installation
 ansible --version
-
+ansible-galaxy collection install community.general
 ansible-playbook install.yaml --ask-become-pass
