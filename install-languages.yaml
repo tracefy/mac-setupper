@@ -218,6 +218,10 @@
       homebrew:
         name: composer
         state: latest
+    - name: Install curl
+      homebrew:
+        name: imageoptim
+        state: latest
     - name: Install TypeScript
       npm:
         name: typescript
