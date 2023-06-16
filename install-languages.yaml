@@ -214,6 +214,10 @@
       homebrew:
         name: curl
         state: latest
+    - name: Install curl
+      homebrew:
+        name: composer
+        state: latest
     - name: Install TypeScript
       npm:
         name: typescript
