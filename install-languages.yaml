@@ -222,7 +222,12 @@
       homebrew:
         name: imageoptim
         state: latest
+    - name: Install curl
+      homebrew:
+        name: omnidisksweeper
+        state: latest
     - name: Install TypeScript
       npm:
         name: typescript
         global: yes
+
