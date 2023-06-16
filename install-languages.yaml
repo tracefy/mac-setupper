@@ -52,7 +52,6 @@
         source ~/.bash_profile
         nvm install {{ item }}
       loop:
-        - 14
         - 16
         - 18
         - 20
