@@ -214,20 +214,25 @@
       homebrew:
         name: curl
         state: latest
-    - name: Install curl
+    - name: Install composer
       homebrew:
         name: composer
         state: latest
-    - name: Install curl
+    - name: Install imageoptim
       homebrew:
         name: imageoptim
         state: latest
-    - name: Install curl
+    - name: Install omnidisksweeper
       homebrew:
         name: omnidisksweeper
+        state: latest
+    - name: Install the-unarchiver
+      homebrew:
+        name: the-unarchiver
         state: latest
     - name: Install TypeScript
       npm:
         name: typescript
         global: yes
+
 
