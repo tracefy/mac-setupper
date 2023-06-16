@@ -1,4 +1,31 @@
 - block:
+    - name: Install Oh My Zsh
+      git:
+        repo: https://github.com/ohmyzsh/ohmyzsh.git
+        dest: ~/.oh-my-zsh
+        depth: 1
+
+    - name: Set ZSH as default shell
+      shell: chsh -s /bin/zsh "{{ ansible_user_id }}"
+
+    - name: Copy Oh My Zsh configuration file
+      become: true
+      copy:
+        src: ~/.oh-my-zsh/templates/zshrc.zsh-template
+        dest: ~/.zshrc
+
+    - name: Add aliases to .zshrc
+      become: true
+      lineinfile:
+        dest: ~/.zshrc
+        line: "{{ item }}"
+        insertafter: EOF
+      with_items:
+        - "alias uuid='uuidgen | tr \"[:upper:]\" \"[:lower:]\"'"
+        - "alias pa='./exec.sh php artisan'"
+        - "alias zshconfig='mate ~/.zshrc'"
+        - "alias ohmyzsh='mate ~/.oh-my-zsh'"
+
     - name: Check if Git is installed
       shell: brew list --versions git
       register: git_installed
@@ -81,33 +108,6 @@
       lineinfile:
         dest: ~/.bash_profile
         line: 'export PATH="$HOME/.cargo/bin:$PATH"'
-    - name: Install Oh My Zsh
-      git:
-        repo: https://github.com/ohmyzsh/ohmyzsh.git
-        dest: ~/.oh-my-zsh
-        depth: 1
-
-    - name: Set ZSH as default shell
-      shell: chsh -s /bin/zsh "{{ ansible_user_id }}"
-
-    - name: Copy Oh My Zsh configuration file
-      become: true
-      copy:
-        src: ~/.oh-my-zsh/templates/zshrc.zsh-template
-        dest: ~/.zshrc
-
-    - name: Add aliases to .zshrc
-      become: true
-      lineinfile:
-        dest: ~/.zshrc
-        line: "{{ item }}"
-        insertafter: EOF
-      with_items:
-        - "alias uuid='uuidgen | tr \"[:upper:]\" \"[:lower:]\"'"
-        - "alias pa='./exec.sh php artisan'"
-        - "alias zshconfig='mate ~/.zshrc'"
-        - "alias ohmyzsh='mate ~/.oh-my-zsh'"
-
     - name: Add plugins to .zshrc
       become: true
       lineinfile:
