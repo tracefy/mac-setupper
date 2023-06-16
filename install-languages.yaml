@@ -230,6 +230,10 @@
       homebrew:
         name: the-unarchiver
         state: latest
+    - name: Install raspberry-pi-imager
+      homebrew:
+        name: raspberry-pi-imager
+        state: latest
     - name: Install TypeScript
       npm:
         name: typescript
