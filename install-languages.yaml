@@ -234,6 +234,10 @@
       homebrew:
         name: raspberry-pi-imager
         state: latest
+    - name: Install redisinsight
+      homebrew:
+        name: redisinsight
+        state: latest
     - name: Install TypeScript
       npm:
         name: typescript
