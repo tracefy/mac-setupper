@@ -9,6 +9,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Update Homebrew
 brew update
+brew analytics off
 
 # Install Python3
 brew install python@3.11
